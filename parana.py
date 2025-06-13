@@ -1,7 +1,6 @@
 import sqlite3
 
 def get_shopper_full_name(conn, shopper_id):
-    """Retrieve the full name of the shopper if the shopper_id exists."""
     cursor = conn.cursor()
     cursor.execute("""
         SELECT shopper_first_name, shopper_surname
@@ -15,7 +14,6 @@ def get_shopper_full_name(conn, shopper_id):
         return None
 
 def print_main_menu():
-    """Prints the main menu for the shopper."""
     print("\nPARANÁ – SHOPPER MAIN MENU\n")
     print("1. Display your order history")
     print("2. Add an item to your basket")
@@ -26,13 +24,10 @@ def print_main_menu():
     print("7. Exit\n")
 
 def main():
-    # Connect to the database
     conn = sqlite3.connect('parana.db')
 
-    # Prompt for shopper_id
     shopper_id = input("Enter your shopper_id: ").strip()
 
-    # Validate shopper
     shopper_name = get_shopper_full_name(conn, shopper_id)
 
     if not shopper_name:
@@ -43,7 +38,6 @@ def main():
     print(f"Welcome, {shopper_name}!")
     print_main_menu()
 
-    # Keep connection open for future menu options
     conn.close()
 
 if __name__ == "__main__":
